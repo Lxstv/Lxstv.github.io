@@ -20,7 +20,7 @@
 <meta property="og:url" content="https://Lxstv.github.io/post/yi-zhong-2.75-jin-zhi-xu-ni-ji-de-si-lu.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/109198277?s=400&u=a95dbafd704441597d94907b1fc4827905baaecc&v=4">
 <title>一种2.75进制虚拟机的思路</title>
-
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 </head>
 <style>
@@ -91,50 +91,49 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 10 -&gt; (1)(0.25)(1.75)<br>
 11 -&gt; (1)(1.25)(0)</p>
 <p>该结果由以下程序生成：</p>
-<pre lang="python" class="notranslate"><code class="notranslate"># 小数及整数进制转换.py
-from decimal import Decimal
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-c"># 小数及整数进制转换.py</span>
+<span class="pl-k">from</span> <span class="pl-s1">decimal</span> <span class="pl-k">import</span> <span class="pl-v">Decimal</span>
 
-# 将数字转换为进制
-def turn_into(num,Base):
-    # 将输入的数字转换为Decimal类型
-    divisor = Decimal(num)
-    # 定义余数
-    remainder = None
-    # 定义连接符
-    connect = []
-    # 当除数不为0时，循环
-    while divisor != 0:
-        # 将除数和进制数相除，得到余数
-        remainder = Decimal(str(divisor)) % Decimal(str(Base))
-        # 将除数和进制数相除，得到商
-        divisor = Decimal(str(divisor)) // Decimal(str(Base))
-        # 将右括号添加到连接符列表
-        connect.append(')')
-        # 将余数添加到连接符列表
-        connect.append(str(remainder))
-        # 将左括号添加到连接符列表
-        connect.append('(')
-    # 如果连接符列表为空，返回左括号和0，防止空列表报错
-    if len(connect) == 0: return ['(','0',')']
-    # 否则，返回连接符列表反转后的值
-    else: return connect[::-1]
+<span class="pl-c"># 将数字转换为进制</span>
+<span class="pl-k">def</span> <span class="pl-en">turn_into</span>(<span class="pl-s1">num</span>,<span class="pl-v">Base</span>):
+    <span class="pl-c"># 将输入的数字转换为Decimal类型</span>
+    <span class="pl-s1">divisor</span> <span class="pl-c1">=</span> <span class="pl-v">Decimal</span>(<span class="pl-s1">num</span>)
+    <span class="pl-c"># 定义余数</span>
+    <span class="pl-s1">remainder</span> <span class="pl-c1">=</span> <span class="pl-c1">None</span>
+    <span class="pl-c"># 定义连接符</span>
+    <span class="pl-s1">connect</span> <span class="pl-c1">=</span> []
+    <span class="pl-c"># 当除数不为0时，循环</span>
+    <span class="pl-k">while</span> <span class="pl-s1">divisor</span> <span class="pl-c1">!=</span> <span class="pl-c1">0</span>:
+        <span class="pl-c"># 将除数和进制数相除，得到余数</span>
+        <span class="pl-s1">remainder</span> <span class="pl-c1">=</span> <span class="pl-v">Decimal</span>(<span class="pl-en">str</span>(<span class="pl-s1">divisor</span>)) <span class="pl-c1">%</span> <span class="pl-v">Decimal</span>(<span class="pl-en">str</span>(<span class="pl-v">Base</span>))
+        <span class="pl-c"># 将除数和进制数相除，得到商</span>
+        <span class="pl-s1">divisor</span> <span class="pl-c1">=</span> <span class="pl-v">Decimal</span>(<span class="pl-en">str</span>(<span class="pl-s1">divisor</span>)) <span class="pl-c1">//</span> <span class="pl-v">Decimal</span>(<span class="pl-en">str</span>(<span class="pl-v">Base</span>))
+        <span class="pl-c"># 将右括号添加到连接符列表</span>
+        <span class="pl-s1">connect</span>.<span class="pl-en">append</span>(<span class="pl-s">')'</span>)
+        <span class="pl-c"># 将余数添加到连接符列表</span>
+        <span class="pl-s1">connect</span>.<span class="pl-en">append</span>(<span class="pl-en">str</span>(<span class="pl-s1">remainder</span>))
+        <span class="pl-c"># 将左括号添加到连接符列表</span>
+        <span class="pl-s1">connect</span>.<span class="pl-en">append</span>(<span class="pl-s">'('</span>)
+    <span class="pl-c"># 如果连接符列表为空，返回左括号和0，防止空列表报错</span>
+    <span class="pl-k">if</span> <span class="pl-en">len</span>(<span class="pl-s1">connect</span>) <span class="pl-c1">==</span> <span class="pl-c1">0</span>: <span class="pl-k">return</span> [<span class="pl-s">'('</span>,<span class="pl-s">'0'</span>,<span class="pl-s">')'</span>]
+    <span class="pl-c"># 否则，返回连接符列表反转后的值</span>
+    <span class="pl-k">else</span>: <span class="pl-k">return</span> <span class="pl-s1">connect</span>[::<span class="pl-c1">-</span><span class="pl-c1">1</span>]
   
-# 主循环
-while True:
-    # 设置进制为2.75
-    base = 2.75
-    # 获取用户输入的数字
-    num = input('数字：')
+<span class="pl-c"># 主循环</span>
+<span class="pl-k">while</span> <span class="pl-c1">True</span>:
+    <span class="pl-c"># 设置进制为2.75</span>
+    <span class="pl-s1">base</span> <span class="pl-c1">=</span> <span class="pl-c1">2.75</span>
+    <span class="pl-c"># 获取用户输入的数字</span>
+    <span class="pl-s1">num</span> <span class="pl-c1">=</span> <span class="pl-en">input</span>(<span class="pl-s">'数字：'</span>)
   
-    # 打印数字
-    print(num + ' -&gt; ', end='')
-    # 将数字转换为进制并打印
-    sa = turn_into(num , base)
-    for i in sa:
-        print(i,end='')
-    # 打印换行符
-    print()
-</code></pre>
+    <span class="pl-c"># 打印数字</span>
+    <span class="pl-en">print</span>(<span class="pl-s1">num</span> <span class="pl-c1">+</span> <span class="pl-s">' -&gt; '</span>, <span class="pl-s1">end</span><span class="pl-c1">=</span><span class="pl-s">''</span>)
+    <span class="pl-c"># 将数字转换为进制并打印</span>
+    <span class="pl-s1">sa</span> <span class="pl-c1">=</span> <span class="pl-en">turn_into</span>(<span class="pl-s1">num</span> , <span class="pl-s1">base</span>)
+    <span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">in</span> <span class="pl-s1">sa</span>:
+        <span class="pl-en">print</span>(<span class="pl-s1">i</span>,<span class="pl-s1">end</span><span class="pl-c1">=</span><span class="pl-s">''</span>)
+    <span class="pl-c"># 打印换行符</span>
+    <span class="pl-en">print</span>()</pre></div>
 <p>因此，可以通过类似16进制的方式，将这些小数表示出来，例如：<br>
 0.25 &lt;=&gt; g<br>
 1.25 &lt;=&gt; h<br>
